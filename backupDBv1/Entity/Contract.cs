@@ -34,6 +34,7 @@ namespace backupDBv1.Entity
     }
 
     public class DataRunCommand<T>
+
     {
         public T retval { get; set; }
         public int ok { get; set; }
