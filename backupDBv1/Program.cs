@@ -11,7 +11,7 @@ namespace backupDBv1
     {
         static void Main(string[] args)
         {
-            /*
+            
             #region Backup DB
             
             try
@@ -83,7 +83,7 @@ namespace backupDBv1
             }
 
             #endregion
-            */
+            
             #region Update status request
             try
             {
