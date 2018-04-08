@@ -11,6 +11,7 @@ namespace backupDBv1
     {
         static void Main(string[] args)
         {
+            /*
             #region Backup DB
             
             try
@@ -82,20 +83,20 @@ namespace backupDBv1
             }
 
             #endregion
-
+            */
             #region Update status request
             try
             {
                 string ConnectionStringVime = ConfigurationSettings.AppSettings["ConnectStringVime"];
                 var connectDbVime = new ConnectDB();
                 var _dbVime = connectDbVime.GetDB(ConnectionStringVime);
-                var contract = new UpdateStatusRequestVime(_dbVime);
-                var result = contract.UpdateStatus();
-                Console.WriteLine($"Update status done : match : {result.MatchedCount} - Modified : {result.ModifiedCount}");
+                var runCommandRepository = new RunCommandRepository(_dbVime);
+                var result = runCommandRepository.UpdateRequestStatusVime().Result;
+                Console.WriteLine($"Update status {result} request");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Update status contract agency admin exception : {ex.Message}");
+                Console.WriteLine($"Update status request vime exception : {ex.Message}");
             }
             #endregion
 

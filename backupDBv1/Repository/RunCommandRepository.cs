@@ -3,6 +3,7 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using System;
+using System.Configuration;
 using System.Threading.Tasks;
 
 namespace backupDBv1.Repository
@@ -27,6 +28,21 @@ namespace backupDBv1.Repository
             catch (Exception ex)
             {
                 WriteLogAsync(ex.Message, "GetContractRemind");
+                return null;
+            }
+        }
+
+        public Task<DataRunCommand<int>> UpdateRequestStatusVime()
+        {
+            try
+            {
+                var updateRequestAfterDay = int.Parse(ConfigurationSettings.AppSettings["UpdateRequestAfterDay"]);
+                string content = $"{{ eval: \"system_closed_request({updateRequestAfterDay})\" }}";
+                return RunCommandAsync<DataRunCommand<int>>(content);
+            }
+            catch (Exception ex)
+            {
+                WriteLogAsync(ex.Message, "system_closed_request");
                 return null;
             }
         }
